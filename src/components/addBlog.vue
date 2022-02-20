@@ -3,7 +3,7 @@
 
     <h2>Add a New Blog Post</h2>
 
-    <form action="">
+    <form v-if="!submitted">
         <label for="">Blog Title</label>
         <input type="text" required v-model.lazy="blog.title">
 
@@ -27,7 +27,13 @@
                 {{ author }}
             </option>
         </select>
+
+        <button v-on:click.prevent="post">Add Blog</button>
     </form>
+
+    <div v-if="submitted">
+        <h3>Thanks for adding your post</h3>
+    </div>
 
     <div id="preview">
         <h3>Preview Blog</h3>
@@ -61,7 +67,22 @@ export default {
         },
         authors: [
             'The Net Ninja', 'The Angular Avenger', 'The Vue Vinidicator'
-        ]
+        ],
+        submitted: false,
+    }
+  }, 
+  methods: {
+    post(){
+        //http capability of vue resource
+        this.$http.post('http://jsonplaceholder.typicode.com/posts', { //making post request to this url, in future if we use firebase, we can change the url to our firebase
+            title: this.blog.title, //line 72-75 is a promise, so we have to pass thru then()
+            body: this.blog.content,
+            userId: 1,
+            author: this.blog.author
+        }).then(function(data){ //data is the data we sent when post request
+              console.log(data);
+              this.submitted = true;
+        }); 
     }
   }
 }
