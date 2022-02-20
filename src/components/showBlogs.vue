@@ -1,10 +1,10 @@
 <template>
-    <div id="show-blogs" v-theme:column="'narrow'"> <!-- wide adalah value didalam binding -->
+    <div id="show-blogs" v-theme="'wide'"> <!-- wide adalah value didalam binding -->
         <h1>All Blog Articles</h1>
         <div class="single-blog" v-for="(blog, idx) in blogs" :key="idx">
-            <h2 v-rainbow> {{ blog.title }} </h2>
+            <h2 v-rainbow> {{ blog.title | to-uppercase}} </h2>
             <article>
-                {{ blog.body }}
+                {{ blog.body | snippet }}
             </article>
         </div>
     </div>

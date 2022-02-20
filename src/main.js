@@ -16,7 +16,7 @@ Vue.directive("rainbow", {
 Vue.directive("theme", {
   bind(el, binding, vnode){
     if(binding.value === 'wide'){
-      el.style.maxWidth = "1200px";
+      el.style.maxWidth = "700px";
     }else if(binding.value === 'narrow'){
       el.style.maxWidth = "560px"
     }
@@ -26,7 +26,16 @@ Vue.directive("theme", {
       el.style.padding = '20px';
     }
   }
-})
+});
+
+// Filters 
+Vue.filter('to-uppercase', function(value){ //value merefers pada data saat filter digunakan, dalam kasus ini nilai value adalah blog.title
+  return value.toUpperCase();
+});
+
+Vue.filter('snippet', function(value){
+  return value.slice(0,100) + '...';
+});
 
 new Vue({
   el: '#app',
