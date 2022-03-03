@@ -1,7 +1,8 @@
 <template>
-    <div id="show-blogs" v-theme="'wide'"> <!-- wide adalah value didalam binding -->
+    <div id="show-blogs"> <!-- wide adalah value didalam binding -->
         <h1>All Blog Articles</h1>
-        <div class="single-blog" v-for="(blog, idx) in blogs" :key="idx">
+        <input type="text" v-model="search" placeholder="Search blogs"/>
+        <div class="single-blog" v-for="(blog, idx) in filteredBlogs" :key="idx">
             <h2 v-rainbow> {{ blog.title | toUppercase}} </h2>
             <article>
                 {{ blog.body | snippet }}
@@ -21,13 +22,22 @@ export default {
                 // title 
                 // user id
                 // body
-            ]
+            ],
+            search: ''
         }
     },
     created() {
         this.$http.get('http://jsonplaceholder.typicode.com/posts').then(function(data){
             this.blogs = data.body.slice(0,10); //first ten element from 100 element of an arrays
       })
+    },
+    computed:{
+        filteredBlogs: function(){
+            return this.blogs.filter((blog) => {
+                // return blog.title.match(this.search);
+                return blog.title.toLowerCase().match(this.search.toLowerCase());
+            });
+        }
     },
     filters: {
         toUppercase(value){
@@ -47,7 +57,7 @@ export default {
 
 <style scoped>
 #show-blogs{
-    max-width: 800px;
+    max-width: 700px;
     margin: 0 auto;
 }
 
@@ -56,5 +66,13 @@ export default {
     margin: 20px 0;
     box-sizing: border-box;
     background: #eee;
+}
+
+input{
+    /* max-width: 400px; */
+    width: 96%;
+    display: block;
+    padding: 5px 10px;
+
 }
 </style>
