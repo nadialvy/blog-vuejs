@@ -20,9 +20,8 @@ export default {
                 // id
                 // title 
                 // user id
-                // body 
-            ],
-            search: ''
+                // body
+            ]
         }
     },
     created() {
