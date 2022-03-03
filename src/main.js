@@ -5,14 +5,6 @@ import App from './App.vue'
 import VueResource from 'vue-resource'
 Vue.use(VueResource); //use it
 
-// custom directive 
-Vue.directive("rainbow", {
-  //control teh functionality of the ddirective
-  bind(el, binding, vnode){
-    el.style.color = "#" + Math.random().toString().slice(2,8);
-  }
-});
-
 Vue.directive("theme", {
   bind(el, binding, vnode){
     if(binding.value === 'wide'){
@@ -29,10 +21,6 @@ Vue.directive("theme", {
 });
 
 // Filters 
-Vue.filter('to-uppercase', function(value){ //value merefers pada data saat filter digunakan, dalam kasus ini nilai value adalah blog.title
-  return value.toUpperCase();
-});
-
 Vue.filter('snippet', function(value){
   return value.slice(0,100) + '...';
 });
