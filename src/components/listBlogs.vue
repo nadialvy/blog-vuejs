@@ -1,12 +1,9 @@
 <template>
     <div id="show-blogs"> <!-- wide adalah value didalam binding -->
-        <h1>All Blog Articles</h1>
+        <h1>List Blog Titles</h1>
         <input type="text" v-model="search" placeholder="Search blogs"/>
         <div class="single-blog" v-for="(blog, idx) in filteredBlogs" :key="idx">
             <h2 v-rainbow> {{ blog.title | toUppercase}} </h2>
-            <article>
-                {{ blog.body | snippet }}
-            </article>
         </div>
     </div>
 </template>
